@@ -1,6 +1,16 @@
-import './App.css'
+import { useEffect } from 'react'
+import { getStores } from '@/core/api'
 
 function App() {
+  async function loadData(){
+    const stores = await getStores()
+    console.log(stores)
+  }
+  
+  useEffect(() => {
+    loadData()
+  },[])
+
   return (
     <div className="App">
       <h1>Welcome to Store</h1>
