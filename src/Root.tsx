@@ -1,28 +1,19 @@
-import { useEffect } from 'react'
-import { getStores } from '@/core/api'
-import { Outlet } from 'react-router-dom'
-import Nav from './components/navigation/nav'
+import { Outlet } from "react-router-dom";
+import Nav from "./components/navigation/nav";
 
 function Root() {
-  async function loadData(){
-    const stores = await getStores()
-    console.log(stores)
-  }
-  
-  useEffect(() => {
-    loadData()
-  },[])
-
-  return (
-    <div className="main">
-      <header>
-        <Nav/>
-      </header>
-      <main>
-        <Outlet />
-      </main>
-    </div>
-  )
+    return (
+        <>
+            <header className="top">
+                <Nav />
+            </header>
+            <main className="content">
+                <div className="inner">
+                    <Outlet />
+                </div>
+            </main>
+        </>
+    );
 }
 
-export default Root
+export default Root;
