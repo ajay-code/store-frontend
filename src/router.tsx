@@ -4,7 +4,7 @@ import {
     useRouteError,
 } from "react-router-dom";
 import Nav from "./components/navigation/nav";
-import { getStores } from "./core/api";
+import { getStores, getPaginatedStores } from "./core/api";
 import Add from "./pages/Add";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -24,11 +24,12 @@ export const router = createBrowserRouter([
             {
                 path: "/",
                 element: <Home />,
-                loader: getStores,
+                loader: () => getStores(),
             },
             {
                 path: "/stores",
                 element: <Stores />,
+                loader: getPaginatedStores,
             },
             {
                 path: "/tags",
