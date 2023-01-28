@@ -28,6 +28,7 @@ function ForgotPasswordForm() {
                 {...register("email")}
                 className={`${errors.email ? "input--error" : ""}`}
             />
+
             {errors.email && (
                 <p className="error-message">
                     {errors.email.message as string}

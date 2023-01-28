@@ -19,7 +19,7 @@ export function Store({ store }: any) {
                     }
                 />
                 <h2 className="title">
-                    <a href="/store/mulberry-coffee">{store.name}</a>
+                    <a href={`store/${store.slug}`}>{store.name}</a>
                 </h2>
             </div>
             <div className="store__details">

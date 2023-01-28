@@ -4,12 +4,19 @@ import {
     useRouteError,
 } from "react-router-dom";
 import Nav from "./components/navigation/nav";
-import { getStores, getPaginatedStores } from "./core/api";
+import {
+    getStores,
+    getPaginatedStores,
+    getTopStores,
+    getStoresByTag,
+    getStoreBySlug,
+} from "./core/api";
 import Add from "./pages/Add";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Map from "./pages/Map";
 import Register from "./pages/Register";
+import Store from "./pages/Store";
 import Stores from "./pages/Stores";
 import Tags from "./pages/Tags";
 import Top from "./pages/Top";
@@ -32,12 +39,24 @@ export const router = createBrowserRouter([
                 loader: getPaginatedStores,
             },
             {
+                path: "/store/:slug",
+                element: <Store />,
+                loader: getStoreBySlug,
+            },
+            {
                 path: "/tags",
                 element: <Tags />,
+                loader: getStoresByTag,
+            },
+            {
+                path: "/tags/:tag",
+                element: <Tags />,
+                loader: getStoresByTag,
             },
             {
                 path: "/top",
                 element: <Top />,
+                loader: getTopStores,
             },
             {
                 path: "/add",

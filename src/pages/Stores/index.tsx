@@ -13,7 +13,7 @@ function Stores() {
             <h2>Stores</h2>
             <div className="stores">
                 {stores.map((store: any) => (
-                    <Store store={store} key={`store-${store.id}`} />
+                    <Store store={store} key={store.id} />
                 ))}
             </div>
             <Pagination
