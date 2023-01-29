@@ -1,7 +1,7 @@
 import { getImageUrl } from "@/utils";
 import { useLoaderData } from "react-router-dom";
-import { DateTime } from "luxon";
-import { getGravatar } from "./getGravatar";
+import { ReviewForm } from "./ReviewForm";
+import { Review } from "./Review";
 
 function Store() {
     const { data } = useLoaderData() as any;
@@ -43,6 +43,9 @@ function Store() {
                                 </li>
                             ))}
                     </ul>
+
+                    <ReviewForm></ReviewForm>
+
                     <div className="reviews">
                         {store.reviews.map((review: any) => (
                             <Review review={review} key={review.id} />
@@ -55,34 +58,3 @@ function Store() {
 }
 
 export default Store;
-function Review({ review }: any) {
-    return (
-        <div className="review">
-            <div className="review__header">
-                <div className="review__author">
-                    <img
-                        className="avatar"
-                        src={getGravatar(review.author.email)}
-                    />
-                    <p>{review.author.name}</p>
-                </div>
-                <div
-                    className="review__stars"
-                    title={`Rated ${review.rating} our of 5 stars`}
-                >
-                    {`★`.repeat(review.rating)}
-                    {`☆`.repeat(5 - review.rating)}
-                </div>
-                <time
-                    className="review__time"
-                    data-datetime={review.created_at}
-                >
-                    {DateTime.fromISO(review.created_at).toRelative()}
-                </time>
-            </div>
-            <div className="review__body">
-                <p>{review.text}</p>
-            </div>
-        </div>
-    );
-}
