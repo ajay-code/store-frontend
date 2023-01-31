@@ -62,7 +62,7 @@ function Nav() {
             </div>
 
             <div className="nav__section nav__section--user">
-                {isLoggedIn ? (
+                {isLoggedIn && user ? (
                     <>
                         <li className="nav__item">
                             <Link
