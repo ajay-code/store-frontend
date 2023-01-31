@@ -21,10 +21,7 @@ function Store() {
                 </div>
 
                 <div className="single__details inner">
-                    <img
-                        className="single__map"
-                        src={`https://maps.googleapis.com/maps/api/staticmap?center=${store.location_coordinates.x},${store.location_coordinates.x}&amp;zoom=14&amp;size=800x150&amp;key=&amp;markers=${store.location_coordinates.x},${store.location_coordinates.y}&amp;scale=2`}
-                    />
+                    <Map store={store} />
                     <p className="single__location">{store.location_address}</p>
                     <p>{store.description}</p>
                     <ul className="tags">
@@ -58,3 +55,42 @@ function Store() {
 }
 
 export default Store;
+
+function Map({ store }: any) {
+    return (
+        <>
+            <iframe
+                width="425"
+                height="350"
+                src={`https://www.openstreetmap.org/export/embed.html?bbox=${calculateBbox(
+                    store.location_coordinates
+                )}&layer=mapnik&marker=${store.location_coordinates.x},${
+                    store.location_coordinates.y
+                }`}
+                style={{
+                    border: "1px solid black",
+                    width: "100%",
+                    height: "400px",
+                    margin: "0",
+                    overflow: "hidden",
+                }}
+            ></iframe>
+        </>
+    );
+}
+
+function calculateBbox(coordinates: { x: number; y: number }) {
+    let latitude = coordinates.y;
+    let longitude = coordinates.x;
+    let distance = 10; // meters
+    let latitudeMin = latitude - distance / 111120;
+    let latitudeMax = latitude + distance / 111120;
+    let longitudeMin =
+        longitude - distance / (111320 * Math.cos((latitude * Math.PI) / 180));
+    let longitudeMax =
+        longitude + distance / (111320 * Math.cos((latitude * Math.PI) / 180));
+
+    // bounding box coordinates
+    const bbox = `${latitudeMin},${longitudeMin},${latitudeMax},${longitudeMax}`;
+    return bbox;
+}

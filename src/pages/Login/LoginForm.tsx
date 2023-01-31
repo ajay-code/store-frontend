@@ -1,7 +1,10 @@
 import { z } from "zod";
-import { FieldValues, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { env } from "@/config";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "@/store";
 
 const loginSchema = z.object({
     email: z.string().email(),
@@ -9,6 +12,10 @@ const loginSchema = z.object({
 });
 
 function LoginForm() {
+    const navigate = useNavigate();
+    const { login } = useAuthStore((state) => ({
+        login: state.login,
+    }));
     const {
         register,
         handleSubmit,
@@ -29,7 +36,11 @@ function LoginForm() {
         if (res.status === 200) {
             console.log("success status:", res.status);
             const user = await res.json();
-            console.log("welcome, ", user.name);
+
+            login({ id: user.id, name: user.name, email: user.email });
+            toast.success("You are now Logged In");
+
+            navigate("/");
         } else {
             console.log("error status:", res.status);
         }

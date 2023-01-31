@@ -3,7 +3,8 @@ import {
     isRouteErrorResponse,
     useRouteError,
 } from "react-router-dom";
-import Nav from "./components/navigation/nav";
+import Nav from "./components/Navigation/Nav";
+import PrivateRoutes from "./components/PrivateRoute/PrivateRoute";
 import {
     getStores,
     getPaginatedStores,
@@ -12,8 +13,10 @@ import {
     getStoreBySlug,
 } from "./core/api";
 import Add from "./pages/Add";
+import Hearts from "./pages/Hearts";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import Logout from "./pages/Logout";
 import Map from "./pages/Map";
 import Register from "./pages/Register";
 import Store from "./pages/Store";
@@ -58,10 +61,7 @@ export const router = createBrowserRouter([
                 element: <Top />,
                 loader: getTopStores,
             },
-            {
-                path: "/add",
-                element: <Add />,
-            },
+
             {
                 path: "/map",
                 element: <Map />,
@@ -73,6 +73,24 @@ export const router = createBrowserRouter([
             {
                 path: "/login",
                 element: <Login />,
+            },
+            {
+                path: "/logout",
+                element: <Logout />,
+            },
+            {
+                path: "/",
+                element: <PrivateRoutes />,
+                children: [
+                    {
+                        path: "/add",
+                        element: <Add />,
+                    },
+                    {
+                        path: "/hearts",
+                        element: <Hearts />,
+                    },
+                ],
             },
         ],
     },

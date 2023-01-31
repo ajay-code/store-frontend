@@ -1,14 +1,15 @@
 export function ReviewForm() {
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        console.log(e.target);
+        const formData = new FormData(e.currentTarget);
+        console.log(formData);
+    };
     return (
-        <form
-            className="reviewer"
-            action="/reviews/58c065dbbbb1a51e0d43a04f"
-            method="POST"
-        >
+        <form className="reviewer" onSubmit={onSubmit}>
             <textarea
                 name="text"
                 placeholder="Did you try this place? Have something to say? Leave a review..."
-                defaultValue={""}
             />
             <div className="reviewer__meta">
                 <div className="reviewer__stars">
