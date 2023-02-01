@@ -1,4 +1,30 @@
+import { NavigateFunction, Navigator } from "react-router-dom";
 import { env } from "../../config";
+
+export async function apiFetch(
+    navigate: NavigateFunction,
+    url: RequestInfo | URL,
+    options?: RequestInit | undefined
+): Promise<any> {
+    if (typeof url === "string") {
+        url = url.startsWith("/") ? url.substring(1, url.length) : url;
+        url = url.endsWith("/") ? url.substring(0, url.length - 1) : url;
+    }
+
+    const apiUrl = `${env.API_URL}/${url}`;
+    const res = await fetch(apiUrl, options);
+
+    if (res.status < 400) {
+        return res;
+    }
+
+    if (res.status == 401) {
+        console.log("/logout#401");
+        navigate("/logout#401");
+    }
+
+    return res;
+}
 
 export async function fetchJSON(url: string) {
     const res = await fetch(url);

@@ -12,6 +12,7 @@ import {
     getStoresByTag,
     getStoreBySlug,
 } from "./core/api";
+import Account from "./pages/Account";
 import Add from "./pages/Add";
 import Hearts from "./pages/Hearts";
 import Home from "./pages/Home";
@@ -89,6 +90,10 @@ export const router = createBrowserRouter([
                     {
                         path: "/hearts",
                         element: <Hearts />,
+                    },
+                    {
+                        path: "/account",
+                        element: <Account />,
                     },
                 ],
             },
