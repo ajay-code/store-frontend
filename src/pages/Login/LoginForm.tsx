@@ -16,6 +16,7 @@ function LoginForm() {
     const { login } = useAuthStore((state) => ({
         login: state.login,
     }));
+
     const {
         register,
         handleSubmit,

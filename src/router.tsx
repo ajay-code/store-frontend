@@ -13,7 +13,8 @@ import {
     getStoreBySlug,
 } from "./core/api";
 import Account from "./pages/Account";
-import Add from "./pages/Add";
+import ResetPassword from "./pages/Account/ResetPassword";
+import AddStore from "./pages/Add";
 import Hearts from "./pages/Hearts";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -80,12 +81,16 @@ export const router = createBrowserRouter([
                 element: <Logout />,
             },
             {
+                path: "/account/reset/:token",
+                element: <ResetPassword />,
+            },
+            {
                 path: "/",
                 element: <PrivateRoutes />,
                 children: [
                     {
                         path: "/add",
-                        element: <Add />,
+                        element: <AddStore />,
                     },
                     {
                         path: "/hearts",
